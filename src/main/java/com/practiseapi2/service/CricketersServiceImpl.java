@@ -78,6 +78,11 @@ public class CricketersServiceImpl implements CricketersService{
     @Override
     public List<CricketersDto> listOfDetails(int pageNo, int pageSize123, String sortBy, String sortDir) {
 
+//        PageRequest pg = PageRequest.ofSize(pageSize123);                    //for only pagination/size of page
+//        PageRequest pg = PageRequest.of(pageNo, pageSize123);
+//        PageRequest pg = PageRequest.of(pageNo, pageSize123, Sort.by(sortBy));
+//        PageRequest pg = PageRequest.of(pageNo, pageSize123, Sort.Direction.DESC, sortBy);
+
         Pageable pg=null;
 
         if(sortDir.equalsIgnoreCase("asc")){

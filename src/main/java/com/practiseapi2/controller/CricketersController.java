@@ -15,12 +15,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/cricapi")
+@CrossOrigin("http://localhost:4200/")   //now it will allow this website will get accesss to use our app otherwise they would have been blocked
 public class CricketersController {
 
     private CricketersService cservice;
+    private CricketersRepository crepo;
 
-    public CricketersController(CricketersService cservice) {
+    public CricketersController(CricketersService cservice, CricketersRepository crepo) {
         this.cservice = cservice;
+        this.crepo = crepo;
     }
 
     @PostMapping
@@ -45,7 +48,7 @@ public class CricketersController {
 //    url :- http://localhost:8090/v1/cricapi?pageNo=1&pageSize=3
     @GetMapping
     public ResponseEntity<List<CricketersDto>> listCricketers(
-            @RequestParam( name = "pageNo" ,defaultValue = "0",required = false) int pageNo,
+            @RequestParam( name = "pageNo" ,defaultValue = "1",required = false) int pageNo,
             @RequestParam( name = "pageSize" ,defaultValue = "4",required = false) int pageSize123,
             @RequestParam( name = "sortBy" ,defaultValue = "id",required = false) String sortBy,
             @RequestParam( name = "sortDir" ,defaultValue = "asc",required = false) String sortDir
@@ -56,13 +59,30 @@ public class CricketersController {
         return new ResponseEntity<>(clist, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+//    @PutMapping("/{id}")
+//    public ResponseEntity<?> updateDetails(@PathVariable int id,
+//                                    @RequestBody CricketersDto cdto){
+//
+//        CricketersDto dto =cservice.updateDetails(id ,cdto);
+//
+//        return new ResponseEntity<>(dto, HttpStatus.OK);
+//    }
+
+    @PutMapping("/{id}")           //better to use only when full entity class updation happens/needed
     public ResponseEntity<?> updateDetails(@PathVariable int id,
-                                    @RequestBody CricketersDto cdto){
+                                    @RequestBody Cricketers cricdto){
 
-        CricketersDto dto =cservice.updateDetails(id ,cdto);
+        Cricketers cricketers1 = crepo.findById(id).get();
+        int newid=3;
+//        Optional<Cricketers> optional = crepo.findById(newid);
+//        Cricketers cricketers2 = optional.orElseGet(() -> cricketers1);
 
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        cricketers1.setPlayerName(cricdto.getPlayerName());
+        cricketers1.setStats(cricdto.getStats());
+        cricketers1.setCountryName(cricdto.getCountryName());
+
+        Cricketers saved = crepo.save(cricketers1);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
 
