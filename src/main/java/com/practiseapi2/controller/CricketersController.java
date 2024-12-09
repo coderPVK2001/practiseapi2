@@ -32,6 +32,7 @@ public class CricketersController {
         System.out.println(dto.getId());
 
         CricketersDto savedDto =cservice.addNewData(dto);
+        System.out.println("added new data here ");
 
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
 
