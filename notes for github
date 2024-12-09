@@ -1,0 +1,26 @@
+git-init
+git-add “filename”  
+git add .          
+git status          
+git restore --staged “filename/filepath”
+git commit -m "message"
+
+Important commands :-
+1.	git remote add origin “url” 
+2.	git push -u origin master/branch name 
+3.	git-log   
+
+Branching related commands:-
+1.	git branch “newbranchname”        
+2.	git checkout -b “newbranchname”
+3.	git switch/checkout “branchname” 
+4.	git branch                                          
+
+For merging xyz branch code to main/master branch :-
+git checkout “main/master”
+git merge “branchName”   
+
+For cloning the project:--
+git clone "url"
+git clone -b "branchName" "url"
+
