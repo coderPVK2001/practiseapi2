@@ -20,4 +20,7 @@ For merging xyz branch code to main/master branch :-
 git checkout “main/master”
 git merge “branchName”   
 
+For cloning the project:--
+git clone "url"
+git clone -b "branchName" "url"
 
