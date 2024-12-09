@@ -8,7 +8,8 @@ git commit -m "message"
 Important commands :-
 1.	git remote add origin “url” 
 2.	git push -u origin master/branch name 
-3.	git-log   
+3.  git pull origin "branchname"
+4.	git-log   
 
 Branching related commands:-
 1.	git branch “newbranchname”        
